@@ -69,6 +69,10 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    private fun getCurrentJsonData(lat: String, long: String) {
+
+    }
+
     private fun locationEnable(): Boolean {
         val locationManager = getSystemService(Context.LOCATION_SERVICE) as LocationManager
         return locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER) || locationManager.isProviderEnabled(
