@@ -161,6 +161,24 @@ class MainActivity : AppCompatActivity() {
 
         return Address(adress.get(0).locality, adress.get(0).countryName)
     }
+
+
+    private fun setValues(response: JSONObject) {
+        val tempCel = response.getJSONArray("data").getJSONObject(0).getInt("temp")
+        celcious.text =  "${tempCel} °C"
+        farenheit.text = "${tempCel * 1.8 + 32} °F"
+        val hdt = response.getJSONArray("data").getJSONObject(0).getString("rh")
+        humidity.text =  hdt + "%"
+        air.text = response.getJSONArray("data").getJSONObject(0).getString("pres") + "mBar"
+        visionlimit.text = response.getJSONArray("data").getJSONObject(0).getString("vis") + "km"
+        val weatherStatus = response.getJSONArray("data").getJSONObject(0).getJSONObject("weather").getString("description")
+        weather.text = weatherStatus
+
+        date.text = response.getJSONArray("data").getJSONObject(0).getString("datetime")
+
+        tv_sunrise_time.text = response.getJSONArray("data").getJSONObject(0).getString("sunrise")
+        tv_sunset_time.text = response.getJSONArray("data").getJSONObject(0).getString("sunset")
+    }
     
 
 }
