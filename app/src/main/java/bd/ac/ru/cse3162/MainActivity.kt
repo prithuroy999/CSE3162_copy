@@ -70,6 +70,36 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun getCurrentJsonData(lat: String, long: String) {
+        val API_KEY = "331ce978da5d446d953f327f3f948f5f"
+        val queue = Volley.newRequestQueue(this)
+
+        val url =
+            "https://api.weatherbit.io/v2.0/current?lat=${lat}&lon=${long}&key=${API_KEY}&include=minutely"
+
+        try {
+            val jsonRequest = JsonObjectRequest(
+                Request.Method.GET, url, null,
+                Response.Listener { response ->
+                    setValues(response)
+                },
+                Response.ErrorListener {
+                    Toast.makeText(
+                        this,
+                        "Please turn on internet connection",
+                        Toast.LENGTH_LONG
+                    ).show()
+                })
+
+
+            queue.add(jsonRequest)
+        } catch (e: Exception) {
+            Toast.makeText(
+                this,
+                "ERROR" + e.message,
+                Toast.LENGTH_LONG
+            ).show()
+        }
+
 
     }
 
@@ -131,9 +161,6 @@ class MainActivity : AppCompatActivity() {
 
         return Address(adress.get(0).locality, adress.get(0).countryName)
     }
-
-
-
-
+    
 
 }
